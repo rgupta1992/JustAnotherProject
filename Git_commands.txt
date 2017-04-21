@@ -15,6 +15,11 @@ git rm <filename> : delete a file
 While renaming a file
 git add <newFileName>
 git rm <oldFileName>
+Another way to rename:
+git mv oldFileName newFileName
+
+Moving one file to another:
+git mv <filename> folderName/<fileName>
 
 
 
