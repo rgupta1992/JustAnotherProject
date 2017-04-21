@@ -1,0 +1,10 @@
+git config --global user.name = "Rahul Gupta"
+git config --global user.email = "rahul@gmail.com"
+
+git init : INitialize required folder with git
+git add . : add all the new changes
+git commit -m "message" : a commit point which we can refer at a later point of time.
+git log : see all commits
+git log --autor="Rahul" : commits by specific user.
+git status : gives the status of new uncommited files
+
