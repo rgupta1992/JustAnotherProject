@@ -10,6 +10,7 @@ git log --autor="Rahul" : commits by specific user.
 git status : gives the status of new uncommited files
 git diff : gives difference between committed version and new version( working copy and repository)
 git diff --staged : compare staging area and repository
+git rm <filename> : delete a file
 
 
 
