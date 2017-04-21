@@ -8,6 +8,7 @@ git commit -m "message" : a commit point which we can refer at a later point of 
 git log : see all commits
 git log --autor="Rahul" : commits by specific user.
 git status : gives the status of new uncommited files
+git diff : gives difference between committed version and new version
 
 
 
