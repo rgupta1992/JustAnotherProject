@@ -26,6 +26,12 @@ git branch <newBranchName>: create a new branch.
 git checkout <newBranchName> : switch to the new branch.
 make required changes.
 git push <nickname> <newBranchName>
+git branch -d <newBranchName>: delete a branch
+
+Merging:
+git branch: check currently woring branch
+go to the master branch
+git merge <newBranchName>
 
 While renaming a file
 git add <newFileName>
