@@ -18,7 +18,14 @@ git rm <filename> : delete a file
 git checkout <commitId> -- <filename> : get commitId from git log, may give only first few characters of commitId.
 git reset HEAD <filename> : unstage a file (HEAD pointer pointing to the current branch)
 git remote add <nickname> <githubRepositoryLink>: connecting local repository to remote repository. (nickname is origin by default)
+git push -u <nickName> master : push the files to remote repository. by default branch name is master. (we are pushing from our local <nickname> repo to master branch)
 git pull : git new changes from remote repository to local repository
+
+Branching:
+git branch <newBranchName>: create a new branch.
+git checkout <newBranchName> : switch to the new branch.
+make required changes.
+git push <nickname> <newBranchName>
 
 While renaming a file
 git add <newFileName>
