@@ -1,16 +1,23 @@
 git config --global user.name = "Rahul Gupta"
 git config --global user.email = "rahul@gmail.com"
 
+git config : to check the configurations
+
 git init : INitialize required folder with git
-git add . : add all the new changes
+git add . : add all the new changes ( can also use git add *)
 git add <fileName>
-git commit -m "message" : a commit point which we can refer at a later point of time.
+git commit -m "message" : a commit point which we can refer at a later point of time.(it creates the snapshot of that point)
+git commit -am "message" : add and commit at same time but not good.(not good all the time)
 git log : see all commits
 git log --autor="Rahul" : commits by specific user.
+git log --pretty=oneline
 git status : gives the status of new uncommited files
 git diff : gives difference between committed version and new version( working copy and repository)
 git diff --staged : compare staging area and repository
-git rm <filename> : delete a file
+git rm <filename> : delete a file 
+git checkout <commitId> -- <filename> : get commitId from git log, may give only first few characters of commitId.
+git reset HEAD <filename> : unstage a file (HEAD pointer pointing to the current branch)
+git remote add <nickname> <githubRepositoryLink>: connecting local repository to remote repository. (nickname is origin by default)
 
 While renaming a file
 git add <newFileName>
@@ -20,6 +27,9 @@ git mv oldFileName newFileName
 
 Moving one file to another:
 git mv <filename> folderName/<fileName>
+
+origin- remote repository, master- current branch
+
 
 
 
