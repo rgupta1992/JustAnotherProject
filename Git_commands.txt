@@ -18,6 +18,7 @@ git rm <filename> : delete a file
 git checkout <commitId> -- <filename> : get commitId from git log, may give only first few characters of commitId.
 git reset HEAD <filename> : unstage a file (HEAD pointer pointing to the current branch)
 git remote add <nickname> <githubRepositoryLink>: connecting local repository to remote repository. (nickname is origin by default)
+git pull : git new changes from remote repository to local repository
 
 While renaming a file
 git add <newFileName>
