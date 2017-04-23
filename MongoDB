@@ -1,0 +1,14 @@
+Download and install mongoDB
+
+Open command prompt:
+c:\Program Files\MongoDB\Server\3.4\bin
+>mkdir \data\db    (Make a directory for db- this is the default location)
+>mongod            (Setup mongoDB onto our system)
+
+Setup PATH in environment variable so that we can directly run all mongoDB commands 
+from cmd(any location) without going to the bin directory.
+MyComputer > Properties > Environment Variable > PATH > Add the mongoDB bin location.
+
+Now to run mongoDB commands,
+>mongo
+start writing the mongo commands.
