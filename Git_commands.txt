@@ -33,6 +33,10 @@ git branch: check currently woring branch
 go to the master branch
 git merge <newBranchName>
 
+Git Ignore:
+create a file .gitignore
+write the name of the files or folder inside it directly to ignore it while pushing
+
 While renaming a file
 git add <newFileName>
 git rm <oldFileName>
