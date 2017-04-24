@@ -12,3 +12,43 @@ MyComputer > Properties > Environment Variable > PATH > Add the mongoDB bin loca
 Now to run mongoDB commands,
 >mongo
 start writing the mongo commands.
+
+DB > Collection > documents  :mongo db data hierarchy
+--------------
+json-generator.com : generate random jsons with required specification.
+----------------
+
+use hockey : switches to hockey db if present else creates and switches.{creating database}
+
+db.players.insert({json data})      //player collection gets created //here db refers to hockey           {ctrl + Enter on webstorm}
+db.players.insert([{json data},{},{}])   /multiple inserts at a time
+
+> db.players.insert({"name": "Harke",
+"position":"mid",
+"id":10134,
+"rank":"305"}
+)
+
+To show all the collections:
+>show collections
+db.players.find() : show the list of all records in collection
+db.players.find().pretty() : list of all records in pretty format
+db.players.findOne() : one record (the first record)
+each document is given a unique id (MongoDB does it by default)
+
+Remove a document
+------------------
+db.players.remove({"_id" : ObjectId("58fd04e84927aa09cd0cffde")})  : removing a document using id.
+
+
+Update:
+-------
+db.players.update({queryparameter},{new document});
+Eg: db.players.update({"id" : 10134},{"name":"Charke"})
+
+Drop collection:
+---------------
+db.players.drop
+
+
+
