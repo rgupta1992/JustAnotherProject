@@ -19,9 +19,10 @@ json-generator.com : generate random jsons with required specification.
 ----------------
 
 use hockey : switches to hockey db if present else creates and switches.{creating database}
-
-db.players.insert({json data})      //player collection gets created //here db refers to hockey           {ctrl + Enter on webstorm}
-db.players.insert([{json data},{},{}])   /multiple inserts at a time
+Insert:
+-------
+db.players.insert({json data})            //player collection gets created //here db refers to hockey    {ctrl + Enter on webstorm}
+db.players.insert([{json data},{},{}])    //multiple inserts at a time
 
 > db.players.insert({"name": "Harke",
 "position":"mid",
@@ -29,12 +30,46 @@ db.players.insert([{json data},{},{}])   /multiple inserts at a time
 "rank":"305"}
 )
 
+
+--> each document is given a unique id (MongoDB does it by default)
+
 To show all the collections:
 >show collections
-db.players.find() : show the list of all records in collection
+
+Find:
+-----
+db.players.find() : show the list of all records in collection  
 db.players.find().pretty() : list of all records in pretty format
 db.players.findOne() : one record (the first record)
-each document is given a unique id (MongoDB does it by default)
+db.players.find({"id" : 10101})  : search a particular record.
+db.players.find({"id" : 10101, "age":21})  multiple search criteria
+db.players.findOne({"position" : "mid"}).pretty()  : search record with position mid which was inserted first.
+db.players.find({
+          $or:[
+              {"position":"mid"},
+              {"position":"forward"},
+          ]
+        })                                                // $ represents special characters to perform different type of operations in
+                                                          // mongoDB
+                                                          
+db.players.find({
+                "id" : {$gt:300}                          //$gt: greater than  // expressions in mongo $gt,$lt,$gte,$lte
+               })                                         // these operations can be run on integer input
+
+db.players.find(
+                {"position":"mid"},{"name":1,"_id":0}           // second object indicates the columns required, we require only the 
+                )                                               //name attribute, _id is selected by default to we gave it value 0 to
+                                                                //unshow it
+db.players.find(
+                {"position":"mid"},{"name":1,"_id":0}           // limits number of records returned , only first 3 records are returned
+                ).limit(3)                                                                
+                                                                
+db.players.find(
+                {"position":"mid"},{"name":1,"_id":0}            // skips first 2 results
+                ).skip(2)                
+
+
+
 
 Remove a document
 ------------------
@@ -44,11 +79,12 @@ db.players.remove({"_id" : ObjectId("58fd04e84927aa09cd0cffde")})  : removing a 
 Update:
 -------
 db.players.update({queryparameter},{new document});
-Eg: db.players.update({"id" : 10134},{"name":"Charke"})
+Eg: db.players.update({"id" : 10134},{"name":"Charke"})  // give complete object over here
 
 Drop collection:
 ---------------
 db.players.drop
 
-
+Others:
+mock data: https://github.com/buckyroberts/Source-Code-from-Tutorials/blob/master/Other/SampleJsonData/fake_bank_data.json
 
