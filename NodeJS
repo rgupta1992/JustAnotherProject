@@ -1,1 +1,13 @@
+Node JS:
+-------
 
+Helps to create server side applications.
+It is good for real time applications(like chat apps)
+
+After installations :
+type >node  in cmd ,
+now we can write javascript code in command prompt
+
+Webstorm > new File > app.js   : Node JS first runs this file(its like the main file)
+
+run the app by typing > node app    in cmd
