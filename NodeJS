@@ -11,3 +11,64 @@ now we can write javascript code in command prompt
 Webstorm > new File > app.js   : Node JS first runs this file(its like the main file)
 
 run the app by typing > node app    in cmd
+
+Concepts:
+----------
+Node JS code runs on the server, (so the code keeps on running until we stop it.)
+/*
+Node JS provide non blocking  asynchronous connection : i.e. there is less chances that you will get
+a "cannot get a connection" error (unless denial of service attack)
+
+How does Node JS do it?
+>Node JS does not create a new thread for each connect, it makes use of the thread whenever a user drops off, thus requiring less resource.
+>Java give each thread a stack and each stack a memory.
+*/   //need to confirm details
+
+>Most of asynchronous functionnality is accomplished through callbacks.
+>Used to build powerful, fast and scalable application.
+>Node JS is also called event driven system.
+
+
+Non-Blocking I/O:
+------------------
+>Node JS works on a single thread using non blocking I/O calls.  : Other applications(Java , PHP creates new threads for each connections)
+ Thus limiting the connection based on memory.
+>Supports tens of thousands of concurrent connections.  : These connections are held in event loop
+>Optimizes throughput and scalability in web applications with many I/O operations
+>This makes Node JS app extremely fast and efficient.
+
+--->
+>Supports concurrency via events and callbacks
+>EventEmitter class is used to bind event and event listeners.
+                           Event Loop 
+                        |->--------|
+EventEmitter--> |||||(Events)      | -- > {Event Handlers}
+                        |-------<--|
+
+
+Programming:
+JavaScript Object:
+
+var person = { 'name':'Rahul', 'age':23}
+function:
+----------
+>function without return statement, returns undefined when called.
+>We can intialize a variable with anynomous function.
+
+var hello = function(){
+                       console.log("Hello");
+                       };
+hello();                // prints Hello
+We can pass this fuction to other functions using the variable.
+Eg:   setTimeout(hello, 5000);                  //print hello after 5 seconds.
+
+Handling Multiple Request:
+---------------------------
+
+Users   --  Server  --  DB
+>Server takes some time to get data from DB.
+>If there are large number of users and server needs process each request one by one , it takes a lot of time.
+>So instead of waiting for a request to complete before getting another request, the server can take request from
+ other users and start processing those parallely.
+>Once the request are process the server provides the response.This way the server does not need to stay idle until a request is 
+  processed.
