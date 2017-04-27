@@ -78,7 +78,7 @@ var Rahul = {
     printDetails : function()              // while we create a class with var, need to create a function in this way.(But no need for 
     {                                      // this in ReactJS
     console.log('My name is Rahul');
-    console.log(this === Rahul);          
+    console.log(this === Rahul);          //true   
     }
 };
 
@@ -86,9 +86,51 @@ Rahul.printDetails();                    // This method is called by Rahul objec
 
 function printDetails(){
     console.log('My name is Something');
-    console.log(this === global);
+    console.log(this === global);         //true
 }
 printDetails();                          //This method is called in global context.
+
+----------
+Prototype:
+----------
+We can add methods and properties to classes using prototype.
+
+A cool example using this keyword and prototype:
+
+var User = function(){
+    this.name = "";
+    this.life = 100;
+    this.giveLife = function (targetPlayer){
+        targetPlayer.life += 1;
+        console.log(this.name + "gave life to" + targetPlayer.name);
+    }
+}
+
+var Mane = new User();
+var Munde = new User();
+Mane.name = "Mane";
+Munde.name = "Munde";
+Mane.giveLife(Munde);
+console.log("Life of Mane:"+ Mane.life);
+console.log("Life of Munde:"+ Munde.life);
+
+User.prototype.attack = function(targetPlayer){
+    targetPlayer.life -= 3;
+    console.log(this.name + "attacked" + targetPlayer.name);
+}
+Mane.attack(Munde);
+console.log("Life of Mane:"+ Mane.life);
+console.log("Life of Munde:"+ Munde.life);
+
+//Here whoever call the user fuction becomes this.
+// Prototype helps to add attack function to the existing user class.
+
+
+--------
+Modules:
+--------
+
+
 
 
 
