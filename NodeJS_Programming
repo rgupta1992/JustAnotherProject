@@ -14,6 +14,7 @@ hello();                // prints Hello
 We can pass this fuction to other functions using the variable.
 Eg:   setTimeout(hello, 5000);                  //print hello after 5 seconds.
 
+----------------------------
 Handling Multiple Request:
 ---------------------------
 
@@ -24,3 +25,70 @@ Users   --  Server  --  DB
  other users and start processing those parallely.
 >Once the request are process the server provides the response.This way the server does not need to stay idle until a request is 
   processed.
+
+Eg:
+function placeAnOrder(orderNumber) {
+    console.log("Order Number"+ orderNumber)
+
+    cookFood(function(){
+        console.log("Order Received for order Number: "+ orderNumber);
+    });
+}
+
+function cookFood(callBackFunction){
+    setTimeout(callBackFunction,5000);           //setTimeout tells that we need to wait for 5 seconds to execute callBackFunction
+}                                                //but till then we can move to the next step.. i.e we are performing execution
+                                                 // asynchronously.
+placeAnOrder(1);
+placeAnOrder(2);
+placeAnOrder(3);
+placeAnOrder(4);
+placeAnOrder(5);
+
+-----------------------
+References to Objects:
+----------------------
+
+In javascript everything is a reference.
+
+Eg:
+var a = {
+    'fruit':'Mango',
+    'taste' : 'sweet'
+}
+
+var b = a;
+b.fruit = 'Orange';
+
+console.log(a.fruit);    // Output is Orange this is because 'b' doesnt create a copy of 'a' but just references to the object a.
+
+We must use Object.assign to create a new object;
+var c = Object.assign({},a);
+c.fruit = 'Guava';
+console.log(c.fruit);     // Guava
+console.log(a.fruit);     // Orange
+
+-------------
+this keyword:
+-------------
+
+this is reference to whatever thing is calling it.
+Eg:
+var Rahul = {
+    printDetails : function()              // while we create a class with var, need to create a function in this way.(But no need for 
+    {                                      // this in ReactJS
+    console.log('My name is Rahul');
+    console.log(this === Rahul);          
+    }
+};
+
+Rahul.printDetails();                    // This method is called by Rahul object 
+
+function printDetails(){
+    console.log('My name is Something');
+    console.log(this === global);
+}
+printDetails();                          //This method is called in global context.
+
+
+
