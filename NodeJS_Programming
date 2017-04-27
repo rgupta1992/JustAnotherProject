@@ -129,6 +129,40 @@ console.log("Life of Munde:"+ Munde.life);
 --------
 Modules:
 --------
+Instead of writing all the javascript codes into one file, we can divide it into multiple files,
+these files are known as modules. 
+We group similar codes together into a file
+We use import/export to use one module into another.
+
+export:
+module.exports.variableName = functionName;
+
+import:
+var someVariableName = require('./fileName');
+someVariableName.variableName;
+
+Eg:
+movies.js:
+---------
+function printBahubaliBeginning(){
+   console.log("Bahubali Beginning");
+}
+
+function  printBahubaliConclusion() {
+    console.log("Bahubali Conclusion");
+}
+
+module.exports.beginning = printBahubaliBeginning;
+module.exports.ending = printBahubaliConclusion;
+
+testMovies.js:
+------------
+var movies = require('./movies');
+
+movies.beginning();
+movies.ending();
+
+------------> Need to check impot export commands.
 
 
 
