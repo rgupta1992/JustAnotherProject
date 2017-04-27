@@ -1,0 +1,26 @@
+Programming:
+JavaScript Object:
+
+var person = { 'name':'Rahul', 'age':23}
+function:
+----------
+>function without return statement, returns undefined when called.
+>We can intialize a variable with anynomous function.
+
+var hello = function(){
+                       console.log("Hello");
+                       };
+hello();                // prints Hello
+We can pass this fuction to other functions using the variable.
+Eg:   setTimeout(hello, 5000);                  //print hello after 5 seconds.
+
+Handling Multiple Request:
+---------------------------
+
+Users   --  Server  --  DB
+>Server takes some time to get data from DB.
+>If there are large number of users and server needs process each request one by one , it takes a lot of time.
+>So instead of waiting for a request to complete before getting another request, the server can take request from
+ other users and start processing those parallely.
+>Once the request are process the server provides the response.This way the server does not need to stay idle until a request is 
+  processed.
