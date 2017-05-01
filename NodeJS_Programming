@@ -180,7 +180,38 @@ console.log("The server is running in port 8888...");
 
 Whenever we refresh the page a new request is generated.
 
+------------------------
+Creating Simple Web Server:
+---------------------------
+We use filesystem (fs) to stream different type of files to the browser.
 
+var http = require('http');
+var fs = require('fs');            //filesystem module is used to display differrent type of file streama
+                                   //like html xml on browser.
+
+http.createServer(onRequest).listen(8999);
+console.log("Currently running on port 8999......");
+
+function onRequest(request, response){
+    if(request.method == 'GET' && request.url == '/'){
+        response.writeHead(200,{"Context-Type" : "text/html"});
+        fs.createReadStream("./index.html").pipe(response);        //createReadStream is used to read inpot from required file
+                                                                   //pipe gives out the output of reading stream to response.
+    }
+    else{
+        send404Error(response);                                    // if url is anything other than localhost:8999 this function gets called.
+    }
+}
+
+function send404Error(response){
+    response.writeHead(404,{"Context-Type" : "text/plain"});
+    response.write("404 Error: Page Not Found");
+    response.end();
+}
+
+
+
+-----------------------------
 
 
 
