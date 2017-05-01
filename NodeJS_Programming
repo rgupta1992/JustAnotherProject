@@ -211,7 +211,37 @@ function send404Error(response){
 
 
 
------------------------------
+---------
+connect()
+---------
+
+It is a server framework.
+>npm install connect
+It handles request urls very easily using 'use' method.
+It can also be used to handle middlewares.
+
+Eg:
+var http = require('http');
+var connect = require('connect');
+
+var app = connect();
+
+app.use('/profile',profile);
+app.use('/contact',contact);
+
+function profile(request,response){
+    response.writeHead(200, {"Context-Type" : "text/plain"});
+    response.write("This is the Profile page.");
+    response.end();
+}
+function contact(request,response){
+    response.writeHead(200, {"Context-Type" : "text/plain"});
+    response.write("This is the Contact page.");
+    response.end();
+}
+
+http.createServer(app).listen(8888);
+console.log("Server running on port 8888 .....");
 
 
 
