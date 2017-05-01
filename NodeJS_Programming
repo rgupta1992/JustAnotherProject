@@ -164,6 +164,25 @@ movies.ending();
 
 ------------> Need to check impot export commands.
 
+Creating a Basic Server:
+-------------------------
+
+var http = require('http');
+
+function onRequest(request, response){
+    console.log("The user initiated a request from "+ request.url);        //(two request comes (with and without favicon)) favicon.ico is the icon that we see beside the title in browser
+    response.writeHead(200, {"Context-Type" : "text/plain"});            //  Header for the response
+    response.write("This is a Hello World!!!");                         //This is seen on the browser
+    response.end();                                                   //ends the response
+}
+http.createServer(onRequest).listen(8888);                        // first a server is created on port 8888. onRequest is called whenever we get request from user(i.i when we hit localhost:8888)
+console.log("The server is running in port 8888...");
+
+Whenever we refresh the page a new request is generated.
+
+
+
+
 
 
 
