@@ -1,0 +1,41 @@
+BufferedReader br = new BufferedReader(new FileReader("C:/somefolder/input.txt"));
+List<Employee> employeeList = new ArrayList<>();
+Map<Integer, Employee> map = new HashMap<>();
+String fetchedLine = "";
+while((fetchedLine = br.readLine()) != null){
+	String[] value = fetchedLine.split(" ");
+	Employee employee = new Employee(Integer.parseInt(value[0]), value[1], value[2], Double.parseDouble(value[3]));
+	employeeList.add(employee);
+	map.put(Integer.parseInt(value[0], employee);
+	}
+	System.out.println("Employee List");
+	for(Employee emp : employeeList){
+	System.out.println("Id : "+ emp. getId() + ......);
+	}
+
+	System.out.println("Incrementing Salary based on id");
+	for(Map.Entry e : map.entrySet()){
+		if(e.getKey() % 2 == 0){
+			e.getValue().setSalary(e.getValue().getSalary() + 5000);
+		}else{
+			e.getValue().setSalary(e.getValue().getSalary() + 7000);
+		}
+
+		System.out.println("Key : "+ e.getKey() + " Name : " + e.getValue().getName() + " Salary : " + e.getValue().getSalary());
+
+		}
+}
+
+
+--------------------------------
+
+Writing to a file:
+
+String sample = "This is a sample string.";
+BufferedWriter br = new BufferedWriter( new FileWriter(new File("C:/someFolder/output.txt")));
+br.write(sample);
+br.close();
+System.out.println("Written to file successfully");
+}
+
+
