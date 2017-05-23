@@ -1,0 +1,264 @@
+Mongoose:
+----------
+
+Install Mongoose:
+-----------------
+> npm install mongoose --save
+
+Include mongoose in our project &
+Connect to the locally running instance of mongoDB:
+---------------------------------------------------
+
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/test'); //Here the name of the database is test.
+
+We need to check whether the connection is open or not:
+-------------------------------------------------------
+
+db.on is written in the given format below:
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error')); //Bind connection to error event (to get notification of connection errors)
+db.once('open', function(){
+	console.log("Connected to Test DB");
+}); 
+
+// db.once is not required..  just to know we are connected to a DB
+
+Schema: 
+-------
+In Mongoose everything is derived from a schema.
+Think of it just like a blue print, not a class but 
+just a blueprint before creating a class.
+Here we define the attributes that are required and its types.
+
+	var reviewSchema = mongoose.Schema({
+		name : String
+	});
+
+Model:
+-----
+We can create a model from a Schema.
+It is just like creating a class from a blueprint.
+Using models we can create documents.
+
+	var Review = mongoose.model('Review', reviewSchema);
+
+creating a document:
+--------------------
+
+var onePlus = new Review({ name : 'OnePlus One'});
+console.log(onePlus.name);
+
+We have created a document.
+We need to save it to mongoDB now using save method.
+
+Save:
+-----
+
+onePlus.save(function(err, onePlus){         // Here the second parameter is not mandatory.
+
+	if(err) return console.error(err);
+	console.log("Inserted"+ onePlus);
+	});
+	
+Now we want to access all the reviews in the Review model.
+We can do this using find method.
+
+Find:
+-----
+
+Review.find(function(err, reviews){                // Here the second parameter is required as it contains the result.
+	if(err) return console.error(err);
+	console.log(reviews);
+	});
+
+Finding using some query parameter like where clause.
+
+Review.find({name : 'OnePlus One'},function(err, review){
+	if(err) return console.error(err);
+	console.log(review);
+	});
+
+The first parameter is the query parameter
+and the second parameter is callback function.
+
+There is another method called findById that is used to quey using Id.
+
+Review.findById(1, function(err, review){
+	if(err) throw err;
+
+	console.log(user);
+	});
+
+Update:
+-------
+
+Review.find({name : 'OnePlus One'},function(err, review){
+	if(err) return console.error(err);
+	review.name = 'OnePlus Two';	
+	
+	review.save(function(err){
+	if(err) throw err;
+
+	console.log("Review successfully updated");
+	});
+});
+
+Another way to do the same is:
+
+Review.findOneAndUpdate({name: 'OnePlus One'},{name : 'OnePlus Two'}, function(err, review){
+		if(err) throw err;
+		console.log(review);
+		});
+
+Another way using Id:
+
+Review.findByIdAndUpdate(1,{name : 'OnePlus Two'}, function(err, review){
+		if(err) throw err;
+		console.log(review);
+		});
+
+
+Delete:
+-------
+
+Review.find({name : 'OnePlus One'},function(err, review){
+	if(err) return console.error(err);
+		
+	
+	review.remove(function(err){
+	if(err) throw err;
+
+	console.log("Review successfully deleted!!");
+	});
+});
+
+Another way:
+
+Review.findOneAndRemove({name: 'OnePlus One'}, function(err, review){
+		if(err) throw err;
+		console.log("User Deleted !!!");
+		});
+
+Works for Id as well. Review.findByIdAndRemove.
+
+
+
+Done!!!!!
+All CRUD operations are finished. Lets get to some more concepts now.
+
+
+Schema Types:
+-------------
+
+var schema = new Schema(
+{
+  name: String,
+  binary: Buffer,
+  living: Boolean,
+  updated: { type: Date, default: Date.now },
+  age: { type: Number, min: 18, max: 65, required: true },
+  mixed: Schema.Types.Mixed,
+  _someId: Schema.Types.ObjectId,
+  array: [],
+  ofString: [String], // You can also have an array of each of the other types too.
+  nested: { stuff: { type: String, lowercase: true, trim: true } }
+})
+
+Eg: 
+
+ var breakfastSchema = new Schema({
+      eggs: {
+        type: Number,
+        min: [6, 'Too few eggs'],
+        max: 12
+        required: [true, 'Why no bacon?']
+      },
+      drink: {
+        type: String,
+        enum: ['Coffee', 'Tea', 'Water',]
+      }
+    });
+
+
+Syntax for creating a document and saving it:
+--------------------------------------------
+
+// Create an instance of model SomeModel
+var awesome_instance = new SomeModel({ name: 'awesome' });
+
+// Save the new model instance, passing a callback
+awesome_instance.save(function (err) {
+  if (err) return handleError(err);
+  // saved!
+});
+
+
+Find:
+------
+
+var Athlete = mongoose.model('Athlete', yourSchema);
+
+// find all athletes who play tennis, selecting the 'name' and 'age' fields
+Athlete.find({ 'sport': 'Tennis' }, 'name age', function (err, athletes) {
+  if (err) return handleError(err);
+  // 'athletes' contains the list of athletes that match the criteria.
+})
+
+
+*************
+
+If you don't specify a callback then the API will return a variable 
+of type Query. You can use this query object to build up your query and then execute it 
+(with a callback) later using the exec() method.
+
+// find all athletes that play tennis
+var query = Athlete.find({ 'sport': 'Tennis' });
+
+// selecting the 'name' and 'age' fields
+query.select('name age');
+
+// limit our results to 5 items
+query.limit(5);
+
+// sort by age
+query.sort({ age: -1 });
+
+// execute the query at a later time
+query.exec(function (err, athletes) {
+  if (err) return handleError(err);
+  // athletes contains an ordered list of 5 athletes who play Tennis
+})
+
+
+***************
+
+ We can also do this using a where() function,
+
+Athlete.
+  find().
+  where('sport').equals('Tennis').
+  where('age').gt(17).lt(50).  //Additional where query
+  limit(5).
+  sort({ age: -1 }).
+  select('name age').
+  exec(callback); // where callback is the name of our callback function.
+
+****************
+
+The find() method gets all matching records, but often you just want to get one match. The following methods query for a single record:
+
+findById(): Finds the document with the specified id (every document has a unique id).
+findOne(): Finds a single document that matches the specified criteria.
+findByIdAndRemove(), findByIdAndUpdate(), findOneAndRemove(), findOneAndUpdate(): Finds a single document by id or criteria and either update or remove it. These are useful convenience functions for updating and removing records.
+
+
+
+
+
+
+
+
+
+
