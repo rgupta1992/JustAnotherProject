@@ -1,1 +1,22 @@
+Install sass
 
+
+main.scss
+---------
+
+$primary-color : green;
+
+h1{
+color : $primary-color;
+}
+
+compiler automatically converts it to css
+
+Nesting:
+--------
+
+nav{
+  ul{
+    background : $primary-color;                      //apply color to ul only if it is inside nav
+    {
+  }
