@@ -13,6 +13,8 @@ Now to run mongoDB commands,
 >mongo
 start writing the mongo commands.
 
+>show dbs    // shows list of all the databases
+
 DB > Collection > documents  :mongo db data hierarchy
 --------------
 json-generator.com : generate random jsons with required specification.
