@@ -1,0 +1,162 @@
+package com.examples;
+
+public class Tree2 {
+	
+	private Tree2 left;
+	private int data;
+	private Tree2 right;
+	
+	Tree2(int data){
+		this.left = null;
+		this.data = data;
+		this.right = null;
+	}
+
+	public Tree2 getLeft() {
+		return left;
+	}
+
+	public void setLeft(Tree2 left) {
+		this.left = left;
+	}
+
+	public int getData() {
+		return data;
+	}
+
+	public void setData(int data) {
+		this.data = data;
+	}
+
+	public Tree2 getRight() {
+		return right;
+	}
+
+	public void setRight(Tree2 right) {
+		this.right = right;
+	}
+}
+
+
+----------------------------------------------------
+
+package com.examples;
+
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class Tree2Test {
+	
+	public static void main(String args[]){
+		int[] array = {5,3,7,8,1,12,6};
+		Tree2 root = null;
+		
+		Tree2Test treeTest = new Tree2Test();
+		
+		for(int i=0; i < array.length ; i++){
+			
+			root = treeTest.add(array[i], root);
+			//System.out.println("Value of I :" + array[i] + "root: " + root.getData());
+		}
+		
+		System.out.println("Preorder Traversal");
+		preorderTraversal(root);
+		System.out.print("null");
+		
+		System.out.println("\n Inorder Traversal");
+		inorderTraversal(root);
+		System.out.print("null");
+		
+		System.out.println("\n Postorder Traversal");
+		postorderTraversal(root);
+		System.out.print("null");
+		
+		
+		int h = height(root);
+		System.out.println(" \n Height of binary tree = "+ h);
+		
+		System.out.println("Depth first search is inorder traversal");
+		
+		System.out.println("Breadth First Search");
+		depthFirstSearch(root);
+		
+	}
+
+	private static void depthFirstSearch(Tree2 root) {
+		Queue<Tree2> queue = new LinkedList<Tree2>();
+		
+		queue.add(root);	
+		
+		while(!queue.isEmpty()){
+			
+				Tree2 temp = queue.remove();
+				System.out.print(temp.getData()+ " -> ");
+				if(temp.getLeft() != null){
+					queue.add(temp.getLeft());
+				}
+				if(temp.getRight() != null){
+					queue.add(temp.getRight());
+				}
+			}
+		}
+		
+		
+	
+	private static int height(Tree2 root) {
+		if(root == null){
+			return -1;
+		}
+		
+		return Math.max(height(root.getLeft()), height(root.getRight()))+ 1;
+		
+	}
+
+	private static void postorderTraversal(Tree2 root) {
+		if(root != null){			
+			preorderTraversal(root.getLeft());
+			preorderTraversal(root.getRight());
+			System.out.print(root.getData() + " -> ");
+			}
+		
+	}
+
+	private static void inorderTraversal(Tree2 root) {
+		if(root != null){			
+			preorderTraversal(root.getLeft());
+			System.out.print(root.getData() + " -> ");
+			preorderTraversal(root.getRight());
+			}
+		
+	}
+
+	private static void preorderTraversal(Tree2 root) {
+		if(root != null){	
+		System.out.print(root.getData() + " -> ");
+		preorderTraversal(root.getLeft());
+		preorderTraversal(root.getRight());
+		
+		}
+	}
+
+	private Tree2 add(int data, Tree2 root) {		
+		
+		if(root == null){
+			//System.out.println("Inside if");
+			Tree2 t = new Tree2(data);
+			root = t;
+		}
+		else{
+			if(data < root.getData()){
+				root.setLeft(add(data, root.getLeft()));
+			}
+			else
+			{
+				root.setRight(add(data, root.getRight()));
+			}
+		}		
+		return root;		
+	}
+	
+	
+
+}
