@@ -1,0 +1,203 @@
+package com.examples;
+
+public class Node {
+	Node next;
+	int value;
+	
+	Node(int value){
+		this.value = value;
+		this.next = null;
+	}
+
+}
+
+------------------------------------
+
+package com.examples;
+
+public class LinkedList {
+	
+	public static void main(String[] args) {
+		int[] arr = {5,8,12,54,1,24,10};
+		Node head = null;
+		
+		for(int i = 0; i< arr.length; i++){
+			//System.out.println("Adding: "+ arr[i]);
+			head = add(arr[i], head);
+			//System.out.println("Head is:"+ head);
+		}
+		
+		head = addNodeAtStart(22, head);
+		System.out.println("Inserting node at starting position");
+		display(head);
+		
+		head = addNodeAtGivenPosition(35,3, head);
+		System.out.println("\nInserting node at given position");
+		display(head);
+		
+		System.out.println("\nDelete node at starting position");
+		head = deleteNodeAtStartingPosition(head);
+		display(head);
+				
+		System.out.println("\nDelete node at ending position");
+		head = deleteNodeAtEndingPosition(head);
+		display(head);
+				
+		System.out.println("\nDelete node at given position");
+		head = deleteNodeAtGivenPosition(4,head);
+		display(head);
+		
+		System.out.println("\nPrint LinkedList in reverse order");
+		displayInReverseOrder(head);
+		System.out.print("null");	
+		
+		System.out.println("\n Reverse the LinkedList");
+		head = reverseTheLinkedList(head);
+		display(head);
+		
+	}
+
+	private static Node reverseTheLinkedList(Node head) {
+		Node curr = head;
+		
+		Node reversed = head;
+		if(head == null){
+			reversed = null;
+		}
+		else if(curr.next == null){
+			reversed = curr;
+		}
+		else{
+			while(curr != null){
+			Node temp1 = curr.next;
+			
+		    reversed = reverseReference(reversed,temp1);
+			curr= temp1;
+		}
+		head.next = null;
+		
+		
+		}
+		return reversed;
+	}
+
+	private static Node reverseReference(Node curr, Node next) {
+		// TODO Auto-generated method stub
+		next.next = curr;
+		
+		System.out.println("Reversing:"+ next.value);
+		return next;
+	}
+
+	private static void displayInReverseOrder(Node head) {
+		if(head == null){
+			return;
+		}		
+		displayInReverseOrder(head.next);
+		System.out.print(head.value + "-");
+		
+	}
+
+	private static Node deleteNodeAtEndingPosition(Node head) {
+		Node curr = head;
+		if(head == null){
+			
+		}
+		else if(curr.next == null){
+			head = null;
+		}
+		else{
+			while( curr.next.next != null){
+				curr = curr.next;
+			}
+			curr.next = null;
+		}
+		return head;
+	}
+
+	private static Node deleteNodeAtStartingPosition(Node head) {
+		Node curr = null;
+		if(head == null){}
+		else{
+			curr = head.next;
+			head = curr;
+		}
+		return head;
+	}
+
+	private static Node deleteNodeAtGivenPosition(int pos, Node head) {
+		// TODO Auto-generated method stub
+		Node curr = head;
+		if(head == null){
+			
+		}
+		else{
+			for(int i = 1; i < pos-1; i++){
+				curr = curr.next;
+			}
+			Node prev = curr;
+			Node currentOne = curr.next;
+			Node upcoming = currentOne.next;
+			prev.next = upcoming;
+			//currentOne = null;
+		}
+		return head;
+	}
+
+	private static Node addNodeAtGivenPosition(int value, int pos, Node head) {
+		Node newNode = new Node(value);
+		Node curr = head;
+		if(head == null){
+			head = newNode;
+		}
+		else{
+			for(int i = 1; i < pos-1 ; i++){
+				curr = curr.next;
+			}
+			Node temp = curr.next;
+			curr.next = newNode;
+			newNode.next = temp;
+		}
+		return head;
+	}
+
+	private static Node addNodeAtStart(int value, Node head) {
+		Node newNode = new Node(value);
+		if(head == null){
+			head = newNode;
+		}
+		else{
+			newNode.next = head;
+			head = newNode;
+		}
+		return head;
+	}
+
+	private static void display(Node head) {
+		System.out.println("Display LinkedList");
+		while(head != null){
+			System.out.print(head.value+ "-");
+			head = head.next;
+		}
+		System.out.print("null");
+	}
+
+	private static Node add(int value, Node head) {
+		Node newNode = new Node(value);
+		Node curr = head;
+		
+		if(head == null){
+			head = newNode;	
+		}
+		else {
+			while(curr.next != null){
+				
+			curr = curr.next;
+			}
+			//System.out.println("Current Node" + curr.value);
+			curr.next = newNode;
+			curr = newNode;
+		}
+		return head;
+	}
+}
