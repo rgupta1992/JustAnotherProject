@@ -1,0 +1,44 @@
+import axios from 'axios';
+
+
+constructor(props){
+        super(props);
+        this.state = {
+            data : {}
+        }
+    }
+ componentDidMount(){
+        var self = this;
+        axios.get('http://swapi.co/api/people/1/')
+            .then(function (response) {
+                 var myData = response.data;
+                console.log(myData);
+                self.setState({data : myData});
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+    
+     render() {
+        return (
+            <div>                
+                <h3>People 1</h3>
+                {this.state.data.name}
+            </div>
+        );
+    }
+    
+    
+    webpack.config.js:
+    ------------------
+    devServer: {
+        inline: true,
+        contentBase: './src',
+        port: 3000,
+        headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+            "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
+        }
+    },                        //working without the header part as well.
