@@ -1,0 +1,100 @@
+html
+------------
+
+
+<div layout-gt-sm="row">
+    <md-input placeholder="filter by index"
+              class="col"
+              [column]="'index'"
+              ng2TableViewFilter="tableBuilder.filtering"
+              (tableChanged)="onChangeTable($event)">
+    </md-input>
+
+    <md-input placeholder="filter by name"
+              class="col"
+              style="margin-left: 2em"
+              [column]="'name'"
+              [ng2TableViewFilter]="tableBuilder.filtering"
+              (tableChanged)="onChangeTable($event)">
+    </md-input>
+</div>
+
+
+<ng2TableView [config]="tableBuilder"
+              (tableChanged)="onChangeTable($event)"
+              [rows]="tableBuilder.rows"
+              [columns]="tableBuilder.columns">
+</ng2TableView>
+
+<ngTableViewPaging [config]="tableBuilder"
+                   [dataLength]="tableBuilder.length"
+                   (pageChanged)="onChangeTable($event)">
+</ngTableViewPaging>
+
+
+ts
+--------
+
+import {Component} from '@angular/core';
+import {TableView} from "NG2TableView";
+import {PageTableColumns} from "../cols/columns";
+
+@Component({
+    selector: "customTable",
+    template: require('./template.html')
+})
+export class CustomTable extends TableView {
+
+    constructor() {
+        super(route.data.getValue().data);
+    }
+
+    ngOnInit() {
+        this.getBuilder()
+            .addCols(PageTableColumns)
+            .setPaging(true)
+            .setItemsPerPage(5)
+            .setSelectable(true);
+
+        this.buildTable();
+    }
+}
+
+
+columns
+------------
+
+import {ColumnIfc, TableColumns, TableColumn} from "NG2TableView";
+export const PageTableColumns:Array<ColumnIfc> = new TableColumns()
+    .addCol(new TableColumn()
+        .setTitle("index")
+        .setName("index")
+        .setSort(true)
+    )
+    .addCol(new TableColumn()
+        .setTitle("Editable name ")
+        .setName("name")
+        .setTemplate(require("./custom-template.html"))
+        .setSort(true)
+    )
+    .addCol(new TableColumn()
+        .setTitle("gender")
+        .setName("gender")
+    )
+    .addCol(new TableColumn()
+        .setTitle("company")
+        .setName("company")
+    )
+    .addCol(new TableColumn()
+        .setTitle("email")
+        .setName("email")
+    )
+    .addCol(new TableColumn()
+        .setTitle("latitude")
+        .setName("location.latitude")
+    )
+    .addCol(new TableColumn()
+        .setTitle("longitude")
+        .setName("location.longitude")
+    )
+    .getCols();
