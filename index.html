@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Date OnChange Event Check</title>   
+</head>
+
+<body>
+    <div class="container">
+   
+    <input type="datetime-local" id = "plannedDateLocal" onchange="myFunction()"/>
+    <input type="datetime-local"  id="plannedDate2" onchange="myFunction2()" />
+    
+    </div>
+
+    <script>
+function myFunction() {
+    ten = function(i){
+        return(i<10 ? '0' : '') + i;
+    };  
+    var plannedStartDate = new Date(document.getElementById("plannedDateLocal").value);
+    
+    plannedStartDate.setDate(plannedStartDate.getDate());
+    var YYYY = plannedStartDate.getFullYear(),
+    MM = ten(plannedStartDate.getMonth() + 3),
+    DD = ten(plannedStartDate.getDate()),
+    HH = ten(plannedStartDate.getHours() - 5),
+    II = ten(plannedStartDate.getMinutes() - 30),
+    SS = ten(plannedStartDate.getSeconds());
+
+    var newDate = YYYY +'-'+ MM +'-'+ DD +'T'+ HH +':'+ II +':'+ SS;
+
+    document.getElementById("plannedDate2").setAttribute("value",newDate);
+      
+}
+
+function myFunction2() {
+    
+    var d1 = new Date(document.getElementById("plannedDate2").value);
+    console.log("Date2:" + d1);
+    var date1 = d1.getDate();
+    console.log("GetDate : " + date1);
+
+    var d3 = new Date(document.getElementById("plannedDateLocal").value);
+
+    var d2 = new Date(document.getElementById("plannedDateLocal").value);
+    d2.setMonth(d2.getMonth() + 2);   
+    
+    if(d1> d2 || d1 < d3){
+        
+        alert("Difference between planned start date and planned end date should not be greater than 60 days");
+    }   
+}
+</script>
+</body>
+
+</html>
